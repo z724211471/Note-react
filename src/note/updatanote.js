@@ -23,7 +23,7 @@ class Notelist extends Component {
 
     }
     componentDidMount() {
-        axios.post('http://127.0.0.1:9000/getNote',{
+        axios.post('http://noteapi.czyyy.top/getNote',{
             noteid:this.props.match.params.id
         })
         .then(rec=>{
@@ -46,7 +46,7 @@ class Notelist extends Component {
       },2000);
       return;
     }
-    axios.post('http://127.0.0.1:9000/updataNote',{
+    axios.post('http://noteapi.czyyy.top/updataNote',{
         uid:this.state.uid,
         noteid:this.state.noteid,
         title:this.state.title,

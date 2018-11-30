@@ -36,7 +36,7 @@ class Notelist extends Component {
       },2000);
       return;
     }
-    axios.post('http://127.0.0.1:9000/addNote',{
+    axios.post('http://noteapi.czyyy.top/addNote',{
         uid:this.state.uid,
         title:this.state.title,
         text:this.state.text,

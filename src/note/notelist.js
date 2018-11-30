@@ -19,7 +19,7 @@ class Notelist extends Component {
        
     }
     componentDidMount() {
-     axios.post('http://127.0.0.1:9000/getUserNote',{
+     axios.post('http://noteapi.czyyy.top/getUserNote',{
          userid:Cookies.get('userid'),
      })
      .then(rec=>{
@@ -48,7 +48,7 @@ class Notelist extends Component {
         this.setState({isshow:false});
       },2000);
     }
-    axios.post('http://127.0.0.1:9000/adduser',{
+    axios.post('http://noteapi.czyyy.top/adduser',{
         username:this.state.username,
         password:this.state.password,
         realname:this.state.realname,

@@ -43,7 +43,7 @@ this.state = {
       },2000);
     }
  
-    axios.post('http://127.0.0.1:9000/openlogin',{
+    axios.post('http://noteapi.czyyy.top/openlogin',{
       username:this.state.username,
       password:this.state.password,
     })

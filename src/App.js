@@ -6,6 +6,7 @@ import re from './re/re'
 import { Button,InputGroup,FormControl,Alert} from 'react-bootstrap';
 import { instanceOf } from 'prop-types';
 import  Cookies  from 'js-cookie';
+import   {url} from './config'
 import {
   BrowserRouter as Router,
   Route,
@@ -14,7 +15,7 @@ import {
   browserHistory,
   Link
 } from 'react-router-dom';
-
+import { Toast } from 'antd-mobile';
 
 class App extends Component {
 
@@ -30,20 +31,23 @@ this.state = {
 }
   }
   openLogin() {
+
     if(!this.state.username){
       this.setState({isshow:true,messges:'请输入用户名'});
       setTimeout(()=>{
         this.setState({isshow:false});
       },2000);
+      return;
     }
     if(!this.state.password){
       this.setState({isshow:true,messges:'请输入密码'});
       setTimeout(()=>{
         this.setState({isshow:false});
       },2000);
+       return;
     }
- 
-    axios.post('http://noteapi.czyyy.top/openlogin',{
+
+    axios.post(`${url}/openlogin`,{
       username:this.state.username,
       password:this.state.password,
     })
@@ -52,6 +56,8 @@ this.state = {
       Cookies.set('userid', rec.data.data.id);
       this.props.history.push('/notelist');
      }else{
+    
+      Toast.info(rec.data.data, 2);
       this.setState({isshow:true,messges:re.data.data});
       setTimeout(()=>{
         this.setState({isshow:false});
@@ -74,7 +80,6 @@ this.state = {
   render() {
     return (
       <div className="App">
-
         <header className="App-header">
         <Alert  variant="danger" onClose={this.openda} show={this.state.isshow}>
    {this.state.messges}
@@ -95,9 +100,10 @@ this.state = {
     </InputGroup.Prepend>
     <FormControl aria-label="Small" placeholder="请输入密码" name="password" value={this.state.password} type="password" onChange={this.vauleChange}   aria-describedby="inputGroup-sizing-sm" />
   </InputGroup>
-        {/* <botton className="login-btn"  onClick={this.openLogin}>登录</botton>   */}
-     
+       
+
         <Button  onClick={this.openLogin}  size="sm" block>登录</Button>
+
       <Link to="/re" className="gore">马上注册</Link>  
       
        

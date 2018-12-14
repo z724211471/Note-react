@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import '../App';
 import axios from 'axios';
 import { Button,Alert} from 'react-bootstrap';
-
+import {url} from '../config'
 import  Cookies from 'js-cookie';
+import { Toast } from 'antd-mobile';
 class Notelist extends Component {
     constructor(props) {
         super(props);
@@ -36,7 +37,7 @@ class Notelist extends Component {
       },2000);
       return;
     }
-    axios.post('http://noteapi.czyyy.top/addNote',{
+    axios.post(`${url}/addNote`,{
         uid:this.state.uid,
         title:this.state.title,
         text:this.state.text,
@@ -44,8 +45,10 @@ class Notelist extends Component {
       .then(rec=>{
         console.log(rec.data);
         if(rec.data.code===200){
+          Toast.info(rec.data.data, 2);
             this.props.history.goBack();
         }else if (rec.data.code===401){
+          Toast.info(rec.data.data, 2);
           this.setState({isshow:true,messges:rec.data.data});
       setTimeout(()=>{
         this.setState({isshow:false});

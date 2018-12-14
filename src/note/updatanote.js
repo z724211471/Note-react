@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import '../App';
 import axios from 'axios';
 import { Button,Alert} from 'react-bootstrap';
-
+import {url} from '../config'
 import  Cookies from 'js-cookie';
+import { Toast } from 'antd-mobile';
 class Notelist extends Component {
     constructor(props) {
         super(props);
@@ -23,11 +24,11 @@ class Notelist extends Component {
 
     }
     componentDidMount() {
-        axios.post('http://noteapi.czyyy.top/getNote',{
+        axios.post(`${url}/getNote`,{
             noteid:this.props.match.params.id
         })
         .then(rec=>{
-            console.log(rec.data);
+          
            this.setState({title:rec.data.data.title,text:rec.data.data.text});
         })
          }
@@ -46,7 +47,7 @@ class Notelist extends Component {
       },2000);
       return;
     }
-    axios.post('http://noteapi.czyyy.top/updataNote',{
+    axios.post(`${url}/updataNote`,{
         uid:this.state.uid,
         noteid:this.state.noteid,
         title:this.state.title,
@@ -55,8 +56,10 @@ class Notelist extends Component {
       .then(rec=>{
         console.log(rec.data);
         if(rec.data.code===200){
+         Toast.info('更新成功', 2);
             this.props.history.goBack();
         }else if (rec.data.code===401){
+          Toast.info(rec.data.data, 2);
           this.setState({isshow:true,messges:rec.data.data});
       setTimeout(()=>{
         this.setState({isshow:false});

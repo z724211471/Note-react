@@ -6,7 +6,11 @@ import {
   BrowserRouter as Router,
   Link
 } from 'react-router-dom';
+import {url} from '../config'
 import  Cookies from 'js-cookie';
+import { Toast } from 'antd-mobile';
+import TabBar from '../tab-bar/index.js'
+
 class Notelist extends Component {
     constructor(props) {
         super(props);
@@ -19,7 +23,7 @@ class Notelist extends Component {
        
     }
     componentDidMount() {
-     axios.post('http://noteapi.czyyy.top/getUserNote',{
+     axios.post(`${url}/getUserNote`,{
          userid:Cookies.get('userid'),
      })
      .then(rec=>{
@@ -48,7 +52,7 @@ class Notelist extends Component {
         this.setState({isshow:false});
       },2000);
     }
-    axios.post('http://noteapi.czyyy.top/adduser',{
+    axios.post(`${url}/adduser`,{
         username:this.state.username,
         password:this.state.password,
         realname:this.state.realname,
@@ -58,6 +62,7 @@ class Notelist extends Component {
         if(rec.data.code===200){
             this.props.history.goBack();
         }else if (rec.data.code===401){
+          Toast.info(rec.data.data,2);
           this.setState({isshow:true,messges:rec.data.data});
       setTimeout(()=>{
         this.setState({isshow:false});
@@ -78,20 +83,9 @@ class Notelist extends Component {
   
 }
   render() {
-     // console.log(this.state.notelist);
-    //   const noteall=this.state.notelist.map((v)=>{
-    //     <li>
-    //     <p>{v.title}</p>
-    //     <div>{v.text}</div>
-    // </li>
-    
-    //   })
+console.log(this.props);
     return (
       <div >
-          
-        {/* <Alert  variant="danger" onClose={this.openda} show={this.state.isshow}>
-   {this.state.messges}
-  </Alert> */}
        
    <div className="notelist">
    <ul>
@@ -102,12 +96,11 @@ class Notelist extends Component {
               <div>{v.text}</div>
               </Link>
          </li>
-  
     )}
    </ul>
 <Link  to="/addnote"> <div className="addnote"><i className="iconfont icon-jia"></i></div></Link>
    </div>
- 
+   <TabBar {...this.props} ></TabBar>
       </div>
     );
   }

@@ -3,6 +3,8 @@ import logo from '../logo.svg';
 import '../App';
 import axios from 'axios';
 import { Button,InputGroup,FormControl,Alert} from 'react-bootstrap';
+import   {url} from '../config'
+import { Toast } from 'antd-mobile';
 class Re extends Component {
     constructor(props) {
         super(props);
@@ -36,7 +38,7 @@ class Re extends Component {
         this.setState({isshow:false});
       },2000);
     }
-    axios.post('http://noteapi.czyyy.top/adduser',{
+    axios.post(`${url}/adduser`,{
         username:this.state.username,
         password:this.state.password,
         realname:this.state.realname,
@@ -46,6 +48,7 @@ class Re extends Component {
         if(rec.data.code===200){
             this.props.history.goBack();
         }else if (rec.data.code===401){
+          Toast.info(rec.data.data, 2);
           this.setState({isshow:true,messges:rec.data.data});
       setTimeout(()=>{
         this.setState({isshow:false});
@@ -91,7 +94,7 @@ class Re extends Component {
       
   <InputGroup size="sm" className="mb-3">
     <InputGroup.Prepend>
-      <InputGroup.Text id="inputGroup-sizing-sm">用户名</InputGroup.Text>
+      <InputGroup.Text id="inputGroup-sizing-sm">真实姓名</InputGroup.Text>
     </InputGroup.Prepend>
     <FormControl aria-label="Small" placeholder="请输入真实姓名" name="realname"  value={this.state.realname} onChange={this.vauleChange}  aria-describedby="inputGroup-sizing-sm" />
   </InputGroup>

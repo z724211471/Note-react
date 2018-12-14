@@ -8,6 +8,8 @@ import re from '../re/re'
 import notelist from '../note/notelist'
 import addnote from '../note/addnote'
 import updatanote from '../note//updatanote'
+import my from '../my/my'
+import noteechart from '../my/note-echarts'
 const getRouter = () => (
    
     <Router>
@@ -19,6 +21,8 @@ const getRouter = () => (
                 <Route path="/notelist" component={notelist} />
                 <Route path="/addnote" component={addnote}  />
                 <Route path="/updatanote/:id" component={updatanote}  />
+                <Route path="/my" component={my} />
+                <Route path="/noteechart" component={noteechart} />
             </Switch>
         </div>
     </Router>

@@ -42,3 +42,11 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+[后台 node 端地址为](https://github.com/z724211471/Note-node),
+
+2018年12月14日 星期五
+1.增加了 TabBar
+2.增加了对每天添加文稿的统计
+3.修改了文稿显示的样式
+

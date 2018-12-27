@@ -6,7 +6,7 @@ import {
   BrowserRouter as Router,
   Link
 } from 'react-router-dom';
-import {url} from '../config'
+import {Http} from '../config'
 import  Cookies from 'js-cookie';
 import { Toast } from 'antd-mobile';
 import TabBar from '../tab-bar/index.js'
@@ -18,12 +18,11 @@ class Notelist extends Component {
         this.openRegistered=this.openRegistered.bind(this);
         this.state = {
           notelist:[],
-
         }
-       
     }
     componentDidMount() {
-     axios.post(`${url}/getUserNote`,{
+    
+      Http.post(`/getUserNote`,{
          userid:Cookies.get('userid'),
      })
      .then(rec=>{
@@ -52,7 +51,7 @@ class Notelist extends Component {
         this.setState({isshow:false});
       },2000);
     }
-    axios.post(`${url}/adduser`,{
+    Http.post(`/adduser`,{
         username:this.state.username,
         password:this.state.password,
         realname:this.state.realname,

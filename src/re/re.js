@@ -3,7 +3,7 @@ import logo from '../logo.svg';
 import '../App';
 import axios from 'axios';
 import { Button,InputGroup,FormControl,Alert} from 'react-bootstrap';
-import   {url} from '../config'
+import   {Http} from '../config'
 import { Toast } from 'antd-mobile';
 class Re extends Component {
     constructor(props) {
@@ -38,7 +38,7 @@ class Re extends Component {
         this.setState({isshow:false});
       },2000);
     }
-    axios.post(`${url}/adduser`,{
+    Http.post(`/adduser`,{
         username:this.state.username,
         password:this.state.password,
         realname:this.state.realname,

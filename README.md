@@ -50,3 +50,5 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 2.增加了对每天添加文稿的统计
 3.修改了文稿显示的样式
 
+2018年12月27日 星期四
+1.优化了一下axios 的封装

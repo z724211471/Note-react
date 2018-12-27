@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../App';
 import axios from 'axios';
 import { Button,Alert} from 'react-bootstrap';
-import {url} from '../config'
+import {Http} from '../config'
 import  Cookies from 'js-cookie';
 import { Toast } from 'antd-mobile';
 class Notelist extends Component {
@@ -24,7 +24,7 @@ class Notelist extends Component {
 
     }
     componentDidMount() {
-        axios.post(`${url}/getNote`,{
+      Http.post(`/getNote`,{
             noteid:this.props.match.params.id
         })
         .then(rec=>{
@@ -47,7 +47,7 @@ class Notelist extends Component {
       },2000);
       return;
     }
-    axios.post(`${url}/updataNote`,{
+    Http.post(`/updataNote`,{
         uid:this.state.uid,
         noteid:this.state.noteid,
         title:this.state.title,
